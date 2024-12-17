@@ -1,16 +1,14 @@
 package org.msc.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Farmer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +20,10 @@ public class Farmer {
     private String address;
 
 
+    public Farmer(String name, String phone, String email, String address) {
+    }
+
+    public Farmer getFarmer() {
+        return null;
+    }
 }
