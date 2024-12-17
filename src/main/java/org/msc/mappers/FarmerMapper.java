@@ -14,11 +14,14 @@ public class FarmerMapper {
     }
 
     public static FarmerResponse toResponse(Farmer farmer){
-        FarmerResponse farmerResponse = FarmerMapper.toResponse(farmer.getFarmer());
-        return new FarmerResponse(farmer.getId(),
+        return new FarmerResponse(
+                farmer.getId(),
                 farmer.getName(),
                 farmer.getPhone(),
                 farmer.getEmail(),
                 farmer.getAddress());
+
     }
+
+
 }
