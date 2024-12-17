@@ -4,10 +4,12 @@ import org.msc.dtos.FarmerRequest;
 import org.msc.dtos.FarmerResponse;
 import org.msc.entities.Farmer;
 import org.msc.exceptions.FarmerExistingPhoneNumberException;
+import org.msc.exceptions.FarmerNotFoundException;
 import org.msc.mappers.FarmerMapper;
 import org.msc.repositories.FarmerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +30,22 @@ public class FarmerService {
         Farmer farmer = FarmerMapper.toEntity(farmerRequest);
         Farmer savedFarmer = farmerRepository.save(farmer);
         return FarmerMapper.toResponse(savedFarmer);
+    }
+
+    public List<FarmerResponse> findAll(){
+        List<Farmer> farmerList= farmerRepository.findAll();
+        return farmerList.stream()
+                .map(FarmerMapper::toResponse).toList();
+    }
+
+    public FarmerResponse findById(Long id){
+        Optional<Farmer> optionalFarmer = farmerRepository.findById(id);
+
+        if (optionalFarmer.isEmpty()){
+            throw new FarmerNotFoundException("The farmer with id " + id + " does not exist.");
+        }
+        Farmer farmer = optionalFarmer.get();
+        return FarmerMapper.toResponse(farmer);
     }
 
 

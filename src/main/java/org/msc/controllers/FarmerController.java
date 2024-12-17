@@ -6,10 +6,9 @@ import org.msc.dtos.FarmerResponse;
 import org.msc.services.FarmerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/farmers")
@@ -24,6 +23,18 @@ public class FarmerController {
     public ResponseEntity<FarmerResponse> addFarmer(@RequestBody @Valid FarmerRequest farmerRequest){
         FarmerResponse farmerResponse = farmerService.createFarmer(farmerRequest);
         return new ResponseEntity<>(farmerResponse, HttpStatus.CREATED);
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<FarmerResponse>> getAllPets(){
+        List<FarmerResponse> allFarmers = farmerService.findAll();
+        return new ResponseEntity<>(allFarmers, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<FarmerResponse> getFarmerById(@PathVariable Long id){
+        FarmerResponse farmerResponse = farmerService.findById(id);
+        return new ResponseEntity<>(farmerResponse, HttpStatus.OK);
     }
 
 }
