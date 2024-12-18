@@ -82,6 +82,23 @@ public class ProductService {
         return ProductMapper.toResponse(product);
     }
 
+    public ProductResponse updateProduct(Long id, ProductRequest productRequest){
+        Optional<Product> optionalProduct = productRepository.findById(id);
+
+        if (optionalProduct.isPresent()){
+            Product product = optionalProduct.get();
+
+            product.setName(productRequest.name());
+            product.setType(productRequest.type());
+
+            Product updateProduct = productRepository.save(product);
+            return ProductMapper.toResponse(updateProduct);
+        }
+        throw new MarketNotFoundException("The product with id " + id + " does not exist.");
+    }
+
+
+
 
 
 }

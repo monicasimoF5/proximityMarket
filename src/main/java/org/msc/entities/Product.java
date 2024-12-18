@@ -2,7 +2,6 @@ package org.msc.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.msc.validations.SeasonNotEmpty;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -31,7 +30,6 @@ public class Product {
     }
 
     @Enumerated(EnumType.STRING)
-    //@SeasonNotEmpty
     private Season season;
 
     @Temporal(TemporalType.TIMESTAMP)
