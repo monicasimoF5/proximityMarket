@@ -56,4 +56,10 @@ public class FarmerController {
         return new ResponseEntity<>(farmerResponse, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteFarmer(@PathVariable Long id){
+        farmerService.deleteFramerById(id);
+        return new ResponseEntity<>("The farmer has been eliminated.", HttpStatus.OK);
+    }
+
 }

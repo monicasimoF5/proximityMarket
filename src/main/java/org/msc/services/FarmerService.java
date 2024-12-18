@@ -41,8 +41,11 @@ public class FarmerService {
     public FarmerResponse findById(Long id){
         Optional<Farmer> optionalFarmer = farmerRepository.findById(id);
 
-        Farmer farmer = optionalFarmer.get();
-        return FarmerMapper.toResponse(farmer);
+        if (optionalFarmer.isPresent()){
+            Farmer farmer = optionalFarmer.get();
+            return FarmerMapper.toResponse(farmer);
+        }
+        throw new FarmerNotFoundException("The farmer with id " + id + " does not exists.");
     }
 
     /*public List<FarmerResponse> findByName (String name){
@@ -68,6 +71,15 @@ public class FarmerService {
         }
         throw new FarmerNotFoundException("The farmer with id " + id + " does not exists.");
     }
+
+public void deleteFramerById(Long id){
+    Optional<Farmer> optionalFarmer = farmerRepository.findById(id);
+
+    if(optionalFarmer.isEmpty()){
+        throw new FarmerNotFoundException("The farmer with id " + id + " does not exists.");
+    }
+    farmerRepository.deleteById(id);
+}
 
 
 }
