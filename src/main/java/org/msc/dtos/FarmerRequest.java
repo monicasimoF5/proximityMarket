@@ -5,8 +5,8 @@ import jakarta.validation.constraints.*;
 
 public record FarmerRequest(
 
-        @NotNull(message = "The name cannot be null.")
-        @NotEmpty(message = "The name cannot be empty.")
+        @NotNull(message = "The name can not be null.")
+        @NotEmpty(message = "The name can not be empty.")
         String name,
 
         @NotBlank
@@ -14,13 +14,13 @@ public record FarmerRequest(
         @Pattern(regexp = "^\\d{9}$", message = "The Phone must be have 9 digits.")
         String phone,
 
-        @NotNull(message = "The email cannot be null.")
-        @NotEmpty(message = "The email cannot be empty.")
+        @NotNull(message = "The email can not be null.")
+        @NotEmpty(message = "The email can not be empty.")
         @Email(message = "The email must be a correctly formatted address.")
         String email,
 
-        @NotNull(message = "The address cannot be null.")
-        @NotEmpty(message = "The address cannot be empty.")
+        @NotNull(message = "The address can not be null.")
+        @NotEmpty(message = "The address can not be empty.")
         String address
 ) {
 }
