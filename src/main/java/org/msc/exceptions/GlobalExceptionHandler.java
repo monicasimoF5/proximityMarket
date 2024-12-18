@@ -22,15 +22,22 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(FarmerNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleFarmerNotFoundException(FarmerNotFoundException exception){
+    @ExceptionHandler(MarketNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleFarmerNotFoundException(MarketNotFoundException exception){
         Map<String, String> errors = new HashMap<>();
         errors.put("error", exception.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(FarmerExistingPhoneException.class)
-    public ResponseEntity<Map<String, String>> handleExistingPhoneException(FarmerExistingPhoneException exception){
+    @ExceptionHandler(MarketExistingPhoneException.class)
+    public ResponseEntity<Map<String, String>> handleExistingPhoneException(MarketExistingPhoneException exception){
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", exception.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(MarketAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleMarketAlreadyExistsException(MarketAlreadyExistsException exception){
         Map<String, String> errors = new HashMap<>();
         errors.put("error", exception.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.CONFLICT);

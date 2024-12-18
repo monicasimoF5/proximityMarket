@@ -3,8 +3,8 @@ package org.msc.services;
 import org.msc.dtos.FarmerRequest;
 import org.msc.dtos.FarmerResponse;
 import org.msc.entities.Farmer;
-import org.msc.exceptions.FarmerExistingPhoneException;
-import org.msc.exceptions.FarmerNotFoundException;
+import org.msc.exceptions.MarketExistingPhoneException;
+import org.msc.exceptions.MarketNotFoundException;
 import org.msc.mappers.FarmerMapper;
 import org.msc.repositories.FarmerRepository;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class FarmerService {
     public FarmerResponse createFarmer(FarmerRequest farmerRequest){
         Optional<Farmer> existFarmer = farmerRepository.findByPhone(farmerRequest.phone());
         if (existFarmer.isPresent())
-            throw new FarmerExistingPhoneException("Farmer already exist with this phone.");
+            throw new MarketExistingPhoneException("Farmer already exist with this phone.");
 
         Farmer farmer = FarmerMapper.toEntity(farmerRequest);
         Farmer savedFarmer = farmerRepository.save(farmer);
@@ -45,7 +45,7 @@ public class FarmerService {
             Farmer farmer = optionalFarmer.get();
             return FarmerMapper.toResponse(farmer);
         }
-        throw new FarmerNotFoundException("The farmer with id " + id + " does not exists.");
+        throw new MarketNotFoundException("The farmer with id " + id + " does not exists.");
     }
 
     /*public List<FarmerResponse> findByName (String name){
@@ -69,14 +69,14 @@ public class FarmerService {
             Farmer updatedFarmer = farmerRepository.save(farmer);
             return FarmerMapper.toResponse(updatedFarmer);
         }
-        throw new FarmerNotFoundException("The farmer with id " + id + " does not exists.");
+        throw new MarketNotFoundException("The farmer with id " + id + " does not exists.");
     }
 
 public void deleteFramerById(Long id){
     Optional<Farmer> optionalFarmer = farmerRepository.findById(id);
 
     if(optionalFarmer.isEmpty()){
-        throw new FarmerNotFoundException("The farmer with id " + id + " does not exists.");
+        throw new MarketNotFoundException("The farmer with id " + id + " does not exists.");
     }
     farmerRepository.deleteById(id);
 }
