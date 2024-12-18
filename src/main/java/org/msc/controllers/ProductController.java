@@ -32,4 +32,10 @@ public class ProductController {
         List<ProductResponse> allProducts = productService.listAllProducts();
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id){
+        ProductResponse productResponse = productService.getProductById(id);
+        return new ResponseEntity<>(productResponse, HttpStatus.OK);
+    }
 }

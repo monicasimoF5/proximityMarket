@@ -13,9 +13,7 @@ import org.msc.exceptions.MarketAlreadyExistsException;
 import org.msc.mappers.ProductMapper;
 import org.msc.repositories.FarmerRepository;
 import org.msc.repositories.ProductRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -59,17 +57,31 @@ public class ProductService {
 
     }
 
-public List<ProductResponse> listAllProducts(){
-        List<Product> productList = productRepository.findAll();
-        List<ProductResponse> responseList = new java.util.ArrayList<>(Collections.emptyList());
-        productList.forEach(product -> {
-            ProductResponse productResponse = ProductMapper.toResponse(product);
-            responseList.add(productResponse);
-        });
+    public List<ProductResponse> listAllProducts(){
+            List<Product> productList = productRepository.findAll();
+            List<ProductResponse> responseList = new java.util.ArrayList<>(Collections.emptyList());
+            productList.forEach(product -> {
+                ProductResponse productResponse = ProductMapper.toResponse(product);
+                responseList.add(productResponse);
+            });
 
-        if(productList.isEmpty()){
-            throw new MarketNotFoundException("There are not products to show.");
+            if(productList.isEmpty()){
+                throw new MarketNotFoundException("There are not products to show.");
+            }
+            return responseList;
+    }
+
+    public ProductResponse getProductById(Long id){
+        Optional<Product> optionalProduct = productRepository.findById(id);
+
+        if (optionalProduct.isEmpty()){
+            throw new MarketNotFoundException("Product with id " + id + " does not exist.");
         }
-        return responseList;
-}
+
+        Product product = optionalProduct.get();
+        return ProductMapper.toResponse(product);
+    }
+
+
+
 }
