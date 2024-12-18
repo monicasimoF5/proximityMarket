@@ -97,6 +97,16 @@ public class ProductService {
         throw new MarketNotFoundException("The product with id " + id + " does not exist.");
     }
 
+    public void deleteProductById(Long id){
+        Optional<Product> optionalProduct = productRepository.findById(id);
+
+        if (optionalProduct.isPresent()){
+            productRepository.deleteById(id);
+        } else {
+            throw new MarketNotFoundException("The product with id " + id + " does not exist.");
+        }
+    }
+
 
 
 
