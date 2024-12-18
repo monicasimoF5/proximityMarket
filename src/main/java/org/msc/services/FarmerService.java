@@ -48,12 +48,15 @@ public class FarmerService {
         throw new MarketNotFoundException("The farmer with id " + id + " does not exists.");
     }
 
-    /*public List<FarmerResponse> findByName (String name){
+    public List<FarmerResponse> findByName (String name){
         List<Farmer> farmers = farmerRepository.findFarmerByName(name);
 
+        if (farmers.isEmpty()){
+            throw new MarketNotFoundException("The farmer with name " + name + " does not exists.");
+        }
         return farmers.stream()
                 .map(FarmerMapper::toResponse).toList();
-    }*/
+    }
 
     public FarmerResponse updateFarmerById(Long id, FarmerRequest farmerRequest){
         Optional<Farmer> optionalFarmer = farmerRepository.findById(id);

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -36,19 +37,15 @@ public class FarmerController {
         return new ResponseEntity<>(allFarmers, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<FarmerResponse> getFarmerById(@PathVariable Long id){
-        FarmerResponse farmerResponse = farmerService.findById(id);
-        return new ResponseEntity<>(farmerResponse, HttpStatus.OK);
-    }
-
-    /*@GetMapping("/farmers/name/{name}")
-    public List<FarmerResponse> getFarmerByName(@PathVariable String name){
-        if (name == null){
-            return farmerService.findAll();
+    @GetMapping("/{name}")
+    public List<FarmerResponse> getFarmerByIdOrName(@PathVariable String name) {
+        try {
+            Long id = Long.parseLong(name);
+            return Collections.singletonList(farmerService.findById(id));
+        } catch (NumberFormatException e) {
+            return farmerService.findByName(name);
         }
-        return farmerService.findByName(name);
-    }*/
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<FarmerResponse> updateFarmer (@PathVariable Long id, @RequestBody @Valid FarmerRequest farmerRequest){
