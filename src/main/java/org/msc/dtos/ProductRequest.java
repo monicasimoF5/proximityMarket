@@ -14,6 +14,7 @@ public record ProductRequest(
 
         String type,
 
+        @NotNull(message = "The season can not be null.")
         Product.Season season,
 
         Date createdAt,

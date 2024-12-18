@@ -2,6 +2,7 @@ package org.msc.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.msc.validations.SeasonNotEmpty;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -30,6 +31,7 @@ public class Product {
     }
 
     @Enumerated(EnumType.STRING)
+    //@SeasonNotEmpty
     private Season season;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -39,17 +41,11 @@ public class Product {
     @JoinColumn(name = "farmerId", nullable = false)
     private Farmer farmer;
 
-    public Product(String name, String type, Season season, Date createdAt, Farmer farmer) {
-        this.name = name;
-        this.type = (type == null || type.isEmpty()) ? "unknown" : type;
-        this.season = season;
-        this.createdAt = createdAt;
-        this.farmer = farmer;
-    }
+
 
     @PrePersist
     public void onCreate(){
-        LocalDateTime now = LocalDateTime.now(of("Europe/Valencia"));
+        LocalDateTime now = LocalDateTime.now(of("Europe/Madrid"));
         Instant instant = now.atZone(ZoneId.systemDefault()).toInstant();
         createdAt = Date.from(instant);
 
@@ -77,6 +73,14 @@ public class Product {
             default:
                 return season.WINTER;
         }
+    }
+
+    public Product(String name, String type, Season season, Date createdAt, Farmer farmer) {
+        this.name = name;
+        this.type = (type == null || type.isEmpty()) ? "unknown" : type;
+        this.season = season;
+        this.createdAt = createdAt;
+        this.farmer = farmer;
     }
 
     public Long getId() {
