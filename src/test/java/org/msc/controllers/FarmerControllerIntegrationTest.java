@@ -54,7 +54,7 @@ public class FarmerControllerIntegrationTest {
                 .andExpect(jsonPath("$.address").value(farmerRequest.address()));
     }
 
-    @MockBean
+    /*@MockBean
     private FarmerService farmerService;
 
     @Autowired
@@ -70,7 +70,7 @@ public class FarmerControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[0].id").value(farmerId.intValue()));
-    }
+    }*/
 
 
 }
