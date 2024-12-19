@@ -25,6 +25,7 @@ public class Product {
     private String name;
     private String type = "unknown";
 
+    @Getter
     public enum Season {
         WINTER, SPRING, SUMMER, AUTUMN
     }
