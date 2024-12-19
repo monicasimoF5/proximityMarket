@@ -28,7 +28,7 @@ public class FarmerControllerIntegrationTest {
     @Test
     public void should_createAFarmer_whenValidRequestIsSent() throws Exception {
 
-        FarmerRequest farmerRequest = new FarmerRequest("farmer1", "123456789", "farmer1@market.com", "address1");
+        FarmerRequest farmerRequest = new FarmerRequest("farmer1", "000000000", "farmer1@market.com", "address1");
         String jsonRequest = asJsonString(farmerRequest);
 
         // Simulación de la petición POST
@@ -43,24 +43,4 @@ public class FarmerControllerIntegrationTest {
                 .andExpect(jsonPath("$.email").value(farmerRequest.email()))
                 .andExpect(jsonPath("$.address").value(farmerRequest.address()));
     }
-
-    /*@MockBean
-    private FarmerService farmerService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Test
-    void should_getFarmerById_whenNameIsNumeric() throws Exception {
-        Long farmerId = 1L;
-        Farmer farmer = new Farmer(farmerId, "John Doe", "123456789", "john.doe@example.com", "Main St 123");
-        Mockito.when(farmerService.findById(anyLong())).thenReturn(farmer);
-
-        mockMvc.perform(get("/farmers/" + farmerId))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.[0].id").value(farmerId.intValue()));
-    }*/
-
-
 }
