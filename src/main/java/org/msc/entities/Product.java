@@ -74,6 +74,7 @@ public class Product {
         }
     }
 
+
     public Product(String name, String type, Season season, Date createdAt, Farmer farmer) {
         this.name = name;
         this.type = (type == null || type.isEmpty()) ? "unknown" : type;

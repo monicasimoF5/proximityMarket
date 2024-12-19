@@ -1,7 +1,6 @@
 package org.msc.controllers;
 
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.msc.dtos.FarmerRequest;
 import org.msc.dtos.FarmerResponse;
 import org.msc.repositories.FarmerRepository;

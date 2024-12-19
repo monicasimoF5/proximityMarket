@@ -1,16 +1,15 @@
 package org.msc.config;
 
-import org.hibernate.grammars.hql.HqlParser;
-import org.msc.dtos.ProductRequest;
+
 import org.msc.entities.Farmer;
 import org.msc.entities.Product;
-import org.msc.mappers.ProductMapper;
 import org.msc.repositories.FarmerRepository;
 import org.msc.repositories.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.annotation.Order;
 
 import java.time.*;
 import java.util.Date;
@@ -21,6 +20,7 @@ import java.util.List;
 public class InitFakeData {
 
     @Bean
+    @Order(1)
     public CommandLineRunner initFarmerData (FarmerRepository farmerRepository){
         return args -> {
             if (farmerRepository.count() == 0){
@@ -34,6 +34,7 @@ public class InitFakeData {
     }
 
     @Bean
+    @Order(2)
     public CommandLineRunner initProductData (ProductRepository productRepository,
                                               FarmerRepository farmerRepository){
         return args -> {
