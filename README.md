@@ -1,7 +1,11 @@
 ![img_1.png](img_1.png)
 
 # 🛒 Proximity Market 
+
+---
+
 ![CI](https://github.com/monicasimoF5/proximityMarket/actions/workflows/ci.yml/badge.svg)
+
 ---
 
 ## 📝 **Introduction**
